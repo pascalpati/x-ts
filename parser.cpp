@@ -66,6 +66,9 @@ uint32 Parser::print_tsHeader()
 	return SUCCESS;
 }
 
+// TODO: Parser now needs a function to read the ts packet
+// read_TSPacket()
+
 uint32 Parser::set_bufferAddr(uint8* buffAddr)
 {
 	cout << "buffAddr = " << hex << (uint16 *)buffAddr << endl;
