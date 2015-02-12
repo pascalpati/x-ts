@@ -1,8 +1,11 @@
 //This file contains parser class definition
 
 #include <iostream>
+#include <fstream>
 
 #include "common.h"
+
+using std::fstream;
 
 class Parser
 {
@@ -13,6 +16,10 @@ public:
 	~Parser();
 
 	// Public member functions
+	
+	// Parse TS packet
+	uint32 parse_tsPacket();
+	
 	// Parse TS header
 	uint32 parse_tsHeader();
 
@@ -22,11 +29,16 @@ public:
 	// Print TS header
 	uint32 print_tsHeader();
 
+	// Set file addr
+	uint32 set_fileAddr(fstream* pfile);
+
 	// Set buffer address
 	uint32 set_bufferAddr(uint8* buffAddr);
 
 private:
 	uint8* buffer_addr;
+
+	fstream* pFile;
 
 	// ts header
 	uint8 sync_byte;
