@@ -28,6 +28,7 @@ int main()
     if (SUCCESS != fileUtility_object.open_file())
     {
         // Unable to proceed as can't open the .ts file.
+<<<<<<< HEAD
         return 0;
     }
     
@@ -39,6 +40,20 @@ int main()
     	//fileUtility_object.read_TSPacket();
 	fileUtility_object.read_fileAddr(&pFile);
 	cout << "File pointer = " << *pFile << endl;
+=======
+        cout << "ERR: Unable to open file!" << endl;
+        return -1;
+    }
+    
+    // get file size
+    fileUtility_object.get_fileSize(&fileSize);
+
+    cout << "File size = " << fileSize << " bytes" << endl;
+    //cout << "File size = " << ((fileSize/1024)/1024) << " MBytes" << endl;
+
+    fileUtility_object.read_fileAddr(&pFile);
+    cout << "File pointer = " << *pFile << endl;
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 
 #if 0
 	(*pFile).read((uint8 *)test_data, TS_PACKET_SIZE);
@@ -56,7 +71,10 @@ int main()
 	cout << dec << endl;
 #endif
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 	fileUtility_object.read_TSFileAddr(&ptsPacketAddr);
 	cout << "main() *ptsPacketAddr = " << hex << (uint16)ptsPacketAddr[0] << endl;
 	cout << "main() ptsPacketAddr = " << hex << (uint16 *)ptsPacketAddr << endl;
@@ -64,6 +82,7 @@ int main()
 	// create the parser object
 	Parser parser_object;
 
+<<<<<<< HEAD
 	parser_object.set_fileAddr(pFile);
 	parser_object.set_bufferAddr(ptsPacketAddr);
 	parser_object.parse_tsPacket();
@@ -77,6 +96,22 @@ int main()
 		fileUtility_object.read_TSPacket();
 	}
 #endif
+=======
+	// pass file addr to parser object
+    parser_object.set_fileAddr(pFile);
+    
+    // pass buffer address to parser object
+	parser_object.set_bufferAddr(ptsPacketAddr);
+	
+    // parse ts packet
+    parser_object.parse_tsPacket();
+	
+    // parse ts header
+    parser_object.parse_tsHeader();
+	
+    // print ts header
+    parser_object.print_tsHeader();
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 
 	return 0;
 }

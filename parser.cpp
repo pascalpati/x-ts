@@ -67,9 +67,12 @@ uint32 Parser::print_tsHeader()
 	return SUCCESS;
 }
 
+<<<<<<< HEAD
 // TODO: Parser now needs a function to read the ts packet
 // read_TSPacket()
 
+=======
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 uint32 Parser::parse_tsPacket()
 {
 #if 1
@@ -79,13 +82,21 @@ uint32 Parser::parse_tsPacket()
     	{
     		// Read 188 bytes into array
      		// tsfile.read((uint8*)data, TS_PACKET_SIZE);
+<<<<<<< HEAD
 		(*pFile).read((uint8 *)test_data, TS_PACKET_SIZE);
+=======
+            (*pFile).read((uint8 *)test_data, TS_PACKET_SIZE);
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
     
     		// IMPORTANT: to set the position back to the beginning of the file. (as read advances the position)
     		//(*pFile).seekg(0, (*pFile).beg);
         
         
+<<<<<<< HEAD
 		cout << hex;
+=======
+            cout << hex;
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 
     		for (uint16 i = 0; i < TS_PACKET_SIZE; i++)
     		{
@@ -128,6 +139,10 @@ uint32 Parser::set_fileAddr(fstream* pfile)
 	return SUCCESS;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 uint32 Parser::set_bufferAddr(uint8* buffAddr)
 {
 	cout << "buffAddr = " << hex << (uint16 *)buffAddr << endl;

@@ -16,6 +16,7 @@ public:
 	~FileUtility();
 
 	// open a file
+<<<<<<< HEAD
     	uint32 open_file();
 	
 	// read TS packets
@@ -28,13 +29,28 @@ public:
 	// uint32 read_TSPacketAddr(uint8** pTSPacket);
     	uint32 read_TSFileAddr(uint8** pTSPacket);
 
+=======
+    uint32 open_file();
+
+	// get file size
+    uint32 get_fileSize(uint32* pfileSize);
+
+    // TODO: Is this needed?
+    // read file address
+    uint32 read_TSFileAddr(uint8** pTSPacket);
+
+    // read file address
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 	uint32 read_fileAddr(fstream** pfile);
 
 private:
 	
+<<<<<<< HEAD
 	// read file size
 	uint32 get_file_size();
 	
+=======
+>>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 	// Private data members
 	const char* filename;
 
