@@ -1,6 +1,7 @@
 // This file contains Parser class implementation
 
 #include <iostream>
+#include <iomanip>
 
 #include "parser.h"
 #include "common.h"
@@ -69,10 +70,68 @@ uint32 Parser::print_tsHeader()
 // TODO: Parser now needs a function to read the ts packet
 // read_TSPacket()
 
+uint32 Parser::parse_tsPacket()
+{
+#if 1
+	uint8* test_data = new uint8 [TS_PACKET_SIZE];
+	
+	for (uint32 i = 0; i < 3; i++)
+    	{
+    		// Read 188 bytes into array
+     		// tsfile.read((uint8*)data, TS_PACKET_SIZE);
+		(*pFile).read((uint8 *)test_data, TS_PACKET_SIZE);
+    
+    		// IMPORTANT: to set the position back to the beginning of the file. (as read advances the position)
+    		//(*pFile).seekg(0, (*pFile).beg);
+        
+        
+		cout << hex;
+
+    		for (uint16 i = 0; i < TS_PACKET_SIZE; i++)
+    		{
+        		cout << showbase << left << setw(8) <<(uint16)test_data[i] << setw(8);
+        		if (!(i%8))
+        		{
+            			cout << endl;
+        		}
+    		}
+		cout << dec << endl;
+    	}
+#endif
+	return SUCCESS;
+}
+
+uint32 Parser::set_fileAddr(fstream* pfile)
+{
+	//uint8* test_data = new uint8 [TS_PACKET_SIZE];
+
+	cout << "file address = " << hex << *pfile << endl;
+
+	pFile = pfile;
+
+#if 0
+	(*pfile).read((uint8 *)test_data, TS_PACKET_SIZE);
+
+	cout << hex;
+
+    	for (uint16 i = 0; i < TS_PACKET_SIZE; i++)
+    	{
+        	cout << showbase << left << setw(8) <<(uint16)test_data[i] << setw(8);
+        	if (!(i%8))
+        	{
+            		cout << endl;
+        	}
+    	}
+	cout << dec << endl;
+#endif
+
+	return SUCCESS;
+}
+
 uint32 Parser::set_bufferAddr(uint8* buffAddr)
 {
 	cout << "buffAddr = " << hex << (uint16 *)buffAddr << endl;
-	cout << "buffAddr[0] = " << hex << (uint16)buffAddr[0] << endl;
+	cout << "buffAddr_value = " << hex << (uint16)*buffAddr << endl;
 
 	buffer_addr = buffAddr;
 	

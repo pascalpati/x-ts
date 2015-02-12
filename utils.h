@@ -16,17 +16,19 @@ public:
 	~FileUtility();
 
 	// open a file
-    uint32 open_file();
+    	uint32 open_file();
 	
 	// read TS packets
-    uint32 read_TSPacket();
+    	uint32 read_TSPacket();
 
 	// get file size
-    uint32 get_fileSize(uint32* pfileSize);
+    	uint32 get_fileSize(uint32* pfileSize);
     
-    // TODO - What is the function of this function
+    	// TODO - What is the function of this function
 	// uint32 read_TSPacketAddr(uint8** pTSPacket);
-    uint32 read_TSFileAddr(uint8** pTSPacket);
+    	uint32 read_TSFileAddr(uint8** pTSPacket);
+
+	uint32 read_fileAddr(fstream** pfile);
 
 private:
 	
