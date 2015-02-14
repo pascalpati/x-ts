@@ -20,25 +20,15 @@ public:
 	// Parse TS packet
 	uint32 parse_tsPacket();
 	
-	// Parse TS header
-	uint32 parse_tsHeader();
-
-	// Print TS packet
-	uint32 print_tsPacket();
-
-	// Print TS header
-	uint32 print_tsHeader();
-
 	// Set file addr
 	uint32 set_fileAddr(fstream* pfile);
-
-	// Set buffer address
-	uint32 set_bufferAddr(uint8* buffAddr);
 
 private:
 	uint8* buffer_addr;
 
 	fstream* pFile;
+
+	uint8* ptsPacket;
 
 	// ts header
 	uint8 sync_byte;
@@ -49,4 +39,13 @@ private:
 	uint8 transport_scrambling_control;
 	uint8 adaptation_field_counter;
 	uint8 continuity_counter;
+	
+	// Set buffer address
+	uint32 set_bufferAddr();
+	
+	// Parse TS header
+	uint32 parse_tsHeader();
+	
+	// Print TS header
+	uint32 print_tsHeader();
 };

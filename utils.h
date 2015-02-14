@@ -21,10 +21,6 @@ public:
 	// get file size
     	uint32 get_fileSize(uint32* pfileSize);
 
-    	// TODO: Is this needed?
-    	// read file address
-    	uint32 read_TSFileAddr(uint8** pTSPacket);
-
     	// read file address
 	uint32 read_fileAddr(fstream** pfile);
 
@@ -36,7 +32,5 @@ private:
 	fstream tsfile;
 	
 	uint32 file_size;
-
-	uint8* data;
 };
 

@@ -16,10 +16,7 @@ int main()
 {
 	uint32 fileSize = 0;
 	
-	uint8* ptsPacketAddr = NULL;;
-
 	fstream* pFile = NULL;
-	//uint8* test_data = new uint8 [TS_PACKET_SIZE];
 
 	// create a file utility object to perform file operations
 	FileUtility fileUtility_object;
@@ -57,28 +54,15 @@ int main()
 	cout << dec << endl;
 #endif
 
-	fileUtility_object.read_TSFileAddr(&ptsPacketAddr);
-	cout << "main() *ptsPacketAddr = " << hex << (uint16)ptsPacketAddr[0] << endl;
-	cout << "main() ptsPacketAddr = " << hex << (uint16 *)ptsPacketAddr << endl;
-
 	// create the parser object
 	Parser parser_object;
 
 	// pass file addr to parser object
     	parser_object.set_fileAddr(pFile);
     
-    	// pass buffer address to parser object
-	parser_object.set_bufferAddr(ptsPacketAddr);
-	
     	// parse ts packet
     	parser_object.parse_tsPacket();
 	
-    	// parse ts header
-    	parser_object.parse_tsHeader();
-	
-    	// print ts header
-    	parser_object.print_tsHeader();
-
 	return 0;
 }
 
