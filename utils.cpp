@@ -28,13 +28,8 @@ FileUtility::~FileUtility()
 uint32 FileUtility::open_file()
 {
 	// File name
-<<<<<<< HEAD
-	filename = "/home/ulas/resources/ts-files/ed24p_00.ts";
-    	//filename = "/Users/demirdru/home/work/x-ts/streams/rte1.ts";
-=======
 	//filename = "/home/ulas/resources/ts-files/ed24p_00.ts";
-    filename = "/Users/demirdru/home/work/x-ts/streams/rte1.ts";
->>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
+    	filename = "/Users/demirdru/home/work/x-ts/streams/rte1.ts";
 
 	// Opening the file
 	tsfile.open(filename, ios::in | ios::binary);
@@ -52,69 +47,20 @@ uint32 FileUtility::open_file()
 		return ERROR;
 	}
 
-<<<<<<< HEAD
-	// Calculate the file size
-	get_file_size();
-
-=======
->>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
 	return SUCCESS; 
 }
 
 uint32 FileUtility::get_fileSize(uint32* pfileSize)
 {
-<<<<<<< HEAD
-	*pfileSize = file_size;
-
-	return SUCCESS;
-}
-
-uint32 FileUtility::get_file_size()
-{
 	file_size = 0;
-
-	tsfile.seekg(0, ios::end);
+    
+    	tsfile.seekg(0, ios::end);
     	file_size = tsfile.tellg();
     	tsfile.seekg(0, ios::beg);
-	
-	cout << "File size = " << file_size << " bytes" << endl;
-
-	return SUCCESS;
-}
-
-uint32 FileUtility::read_TSPacket()
-{
-    	for (uint32 i = 0; i < 3; i++)
-    	{
-    		// Read 188 bytes into array
-     		tsfile.read((uint8*)data, TS_PACKET_SIZE);
     
-    		// IMPORTANT: to set the position back to the beginning of the file. (as read advances the position)
-    		tsfile.seekg(0, tsfile.beg); 
-        
-		cout << hex;
-
-    		for (uint16 i = 0; i < TS_PACKET_SIZE; i++)
-    		{
-        		cout << showbase << left << setw(8) <<(uint16)data[i] << setw(8);
-        		if (!(i%8))
-        		{
-            			cout << endl;
-        		}
-    		}
-		cout << dec << endl;
-    	}
-=======
-	file_size = 0;
+    	//cout << "File size = " << file_size << " bytes" << endl;
     
-    tsfile.seekg(0, ios::end);
-    file_size = tsfile.tellg();
-    tsfile.seekg(0, ios::beg);
-    
-    //cout << "File size = " << file_size << " bytes" << endl;
-    
-    *pfileSize = file_size;
->>>>>>> 8bfe930b277766de05cf3ebee3bb832b021cd25b
+    	*pfileSize = file_size;
 
 	return SUCCESS;
 }
