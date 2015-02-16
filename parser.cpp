@@ -58,36 +58,36 @@ uint32 Parser::print_tsHeader()
 	return SUCCESS;
 }
 
-uint32 Parser::parse_tsPacket()
+uint32 Parser::parse_allTSPackets()
 {
 	for (uint32 i = 0; i < 3; i++)
     	{
     		// Read 188 bytes into array
      		// tsfile.read((uint8*)data, TS_PACKET_SIZE);
-		(*pFile).read((uint8 *)ptsPacket, TS_PACKET_SIZE);
+            (*pFile).read((uint8 *)ptsPacket, TS_PACKET_SIZE);
     
     		// IMPORTANT: to set the position back to the beginning of the file. 
-		// (as read advances the position)
+            // (as read advances the position)
     		//(*pFile).seekg(0, (*pFile).beg);
         
-        
-		cout << hex;
+            cout << hex;
 
     		for (uint16 i = 0; i < TS_PACKET_SIZE; i++)
     		{
-        		cout << showbase << left << setw(8) <<(uint16)ptsPacket[i] << setw(8);
+        		//cout << showbase << left << setw(8) << (uint16)ptsPacket[i] << setw(8);
+                cout << showbase << left << hex << setw(6) << +(unsigned char)ptsPacket[i];
         		if (!(i%8))
         		{
             			cout << endl;
         		}
     		}
-		cout << dec << endl;
+            cout << dec << endl;
     	
-		// set the buffer address
-		set_bufferAddr();
+            // set the buffer address
+            set_bufferAddr();
 
-		parse_tsHeader();
-	}
+            parse_tsHeader();
+        }
 
 	return SUCCESS;
 }

@@ -18,7 +18,7 @@ public:
 	// Public member functions
 	
 	// Parse TS packet
-	uint32 parse_tsPacket();
+	uint32 parse_allTSPackets();
 	
 	// Set file addr
 	uint32 set_fileAddr(fstream* pfile);
