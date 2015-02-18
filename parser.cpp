@@ -26,7 +26,8 @@ uint32 Parser::parse_tsHeader()
 {
 	for (uint16 i = 0; i < TS_HEADER_LENGTH; i++)
 	{
-		cout << "ts header = " << hex << (uint16)buffer_addr[i] << endl;	
+		cout << dec << "ts header[" << i << "]= " << left << hex << +(unsigned char)buffer_addr[i] << endl;
+        cout << "ts header = " << left << (bitset<8>) +(unsigned char)buffer_addr[i] << endl;
 	}
 
 	sync_byte = buffer_addr[0];
@@ -34,12 +35,20 @@ uint32 Parser::parse_tsHeader()
 	transport_error_indicator = (0x80 & buffer_addr[1]) >> 7;
 	payload_unit_start_indicator = (0x40 & buffer_addr[1]) >> 6;
 	transport_priority = (0x20 & buffer_addr[1]) >> 5;
-	packet_identifier = ((0x1F & buffer_addr[1]) << 8) || buffer_addr[2];
-	transport_scrambling_control = (0xC0 & buffer_addr[3]) >> 6;
+	packet_identifier = ((0x1f & buffer_addr[1]) << 8) | (0x00ff & buffer_addr[2]);
+    //cout << "packet_identifier_1 =" << (bitset<16>) (0x1f & buffer_addr[1]) << endl;
+    //cout << "packet_identifier_2 =" << (bitset<16>) ((0x1f & buffer_addr[1]) << 8) << endl;
+    //cout << "packet_identifier_3 =" << (bitset<16>) (0x00ff & buffer_addr[2]) << endl;
+    //cout << "packet_identifier_4 =" << (bitset<16>) (((0x1f & buffer_addr[1]) << 8) | (0x00ff & buffer_addr[2])) << endl;
+    //cout << "packet_identifier_5 =" << (uint16)(((0x1f & buffer_addr[1]) << 8) | (0x00ff & buffer_addr[2])) << endl;
+	transport_scrambling_control = (0xc0 & buffer_addr[3]) >> 6;
 	adaptation_field_counter = (0x30 & buffer_addr[3]) >> 4;
-	continuity_counter = 0xF & buffer_addr[3];
+	continuity_counter = 0xf & buffer_addr[3];
 
-	print_tsHeader();
+    if ((0x0000 == packet_identifier) || (0x0001 == packet_identifier))
+    {
+        print_tsHeader();
+    }
 	
 	return SUCCESS;
 }
@@ -50,7 +59,7 @@ uint32 Parser::print_tsHeader()
 	cout << "transport_error_indicator = " << (uint16)transport_error_indicator << endl;
 	cout << "payload_unit_start_indicator = " << (uint16)payload_unit_start_indicator << endl;
 	cout << "transport_priority = " << (uint16)transport_priority << endl;
-	cout << "PID = " << hex << (uint16)packet_identifier << endl;
+	cout << "PID = " << hex << packet_identifier << endl;
 	cout << "transport_scrambling_control = " << hex << (uint16)transport_scrambling_control << endl;
 	cout << "adaptation_field_counter = " << hex << (uint16)adaptation_field_counter << endl;
 	cout << "continuity_counter = " << hex << (uint16)continuity_counter << endl;
@@ -60,7 +69,17 @@ uint32 Parser::print_tsHeader()
 
 uint32 Parser::parse_allTSPackets()
 {
-	for (uint32 i = 0; i < 3; i++)
+    // TODO: We need total number of TS packages in this file.
+    // TODO: To be able to know it we need to know the file size.
+    uint32 file_size = 0;
+    
+    (*pFile).seekg(0, ios::end);
+    file_size = (*pFile).tellg();
+    (*pFile).seekg(0, ios::beg);
+    
+    cout << "[Parser] file_size = " << dec << file_size << endl;
+    
+    for (uint32 i = 0; i < (file_size/TS_PACKET_SIZE); i++)
     	{
     		// Read 188 bytes into array
      		// tsfile.read((uint8*)data, TS_PACKET_SIZE);
