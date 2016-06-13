@@ -27,7 +27,7 @@ uint32 FileUtility::open_file()
 {
 	// File name
 	//filename = "/home/ulas/resources/ts-files/ed24p_00.ts";
-    filename = "/Users/demirdru/home/work/x-ts/streams/rte1.ts";
+        filename = "/Users/demirdru/work/x-ts/streams/rte1.ts";
 
 	// Opening the file
 	tsfile.open(filename, ios::in | ios::binary);
